@@ -47,6 +47,7 @@ public class Player extends Character
     public void draw(SpriteBatch batch)
     {
         getComponent(SpriteGraphics.class).draw(batch);
+        getComponent(Inventory.class).draw(batch);
     }
 
     public Texture[] getTextures() {

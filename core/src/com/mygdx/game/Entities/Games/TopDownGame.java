@@ -25,7 +25,6 @@ public class TopDownGame extends Game {
         batch.begin();
         getSubEntity(TiledWorld.class).draw(batch);
         getSubEntity(Player.class).draw(batch);
-        getSubEntity(Player.class).getComponent(Inventory.class).draw(batch);
         batch.end();
     }
 
