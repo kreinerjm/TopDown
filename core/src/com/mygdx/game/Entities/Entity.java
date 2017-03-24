@@ -26,10 +26,7 @@ public abstract class Entity
 
     public void tick()
     {
-        for(Component c : components)
-        {
-            c.update();
-        }
+        components.forEach(Component::update);
     }
 
     public abstract void draw(SpriteBatch b);
@@ -72,7 +69,6 @@ public abstract class Entity
         };
     }
 
-
     public void addComponent(Component c)
     {
         if(components.size() < MAX_COMPONENTS)
@@ -88,11 +84,6 @@ public abstract class Entity
         components.remove(c);
     }
 
-    public int getMAX_COMPONENTS()
-    {
-        return MAX_COMPONENTS;
-    }
-
     public Entity getParent() {
         return parent;
     }
@@ -101,13 +92,11 @@ public abstract class Entity
         if(this.parent == null)
         {
             this.parent = parent;
-            parent.addSubEntity(this);
         }
         else
         {
             this.parent.removeSubEntity(this);
             this.parent = parent;
-            parent.addSubEntity(this);
         }
     }
 
@@ -118,6 +107,7 @@ public abstract class Entity
     public void addSubEntity(Entity e)
     {
         subEntities.add(e);
+        e.setParent(this);
     }
 
     public void removeSubEntity(Entity e)
