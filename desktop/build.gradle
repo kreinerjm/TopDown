@@ -6,6 +6,11 @@ sourceSets.main.java.srcDirs = [ "src/" ]
 project.ext.mainClassName = "com.mygdx.game.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../core/assets");
 
+task copyDependencies(type: Copy) {
+    from configurations.compile
+    into 'External Libraries'
+}
+
 task run(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName
     classpath = sourceSets.main.runtimeClasspath
@@ -24,6 +29,7 @@ task dist(type: Jar) {
         attributes 'Main-Class': project.mainClassName
     }
 }
+
 
 dist.dependsOn classes
 

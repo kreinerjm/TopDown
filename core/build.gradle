@@ -5,6 +5,10 @@ sourceCompatibility = 1.8
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
+task copyDependencies(type: Copy) {
+    from configurations.compile
+    into 'External Libraries'
+}
 
 eclipse.project {
     name = appName + "-core"
