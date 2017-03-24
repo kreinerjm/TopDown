@@ -1,10 +1,9 @@
 package com.mygdx.game.Components.InputComponents;
 
 import com.mygdx.game.Entities.Characters.Character;
-import com.mygdx.game.Entities.Entity;
 import com.mygdx.game.Entities.Worlds.World;
 
-public class AIKeyboardInput implements AIInput
+public class AIKeyboardInput extends AIInput
 {
 
 
@@ -14,22 +13,7 @@ public class AIKeyboardInput implements AIInput
     }
 
     @Override
-    public Entity getParent() {
-        return null;
-    }
-
-    @Override
-    public void setParent(Entity set) {
-
-    }
-
-    @Override
-    public String getId() {
-        return null;
-    }
-
-    @Override
-    public void setId(String s) {
+    public void update() {
 
     }
 }

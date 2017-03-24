@@ -1,20 +1,19 @@
 
 package com.mygdx.game.Components.GameComponents;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Entities.Entity;
+import com.mygdx.game.Components.GraphicsComponents.SpriteGraphics;
 import com.mygdx.game.Entities.Items.Item;
 import com.mygdx.game.TopDown2DMain;
 
 import java.util.ArrayList;
 
-public class Inventory implements GameComponent
+public class Inventory extends GameComponent
 {
     int maxItems = 10;
     ArrayList<Item> items;
@@ -22,16 +21,12 @@ public class Inventory implements GameComponent
 
     public Inventory()
     {
-        items = new ArrayList<Item>();
+        items = new ArrayList<>();
     }
 
     public boolean isFull()
     {
-        if(items.size() >= maxItems)
-        {
-            return true;
-        }
-        return false;
+        return items.size() >= maxItems;
     }
 
     public void addItem(Item i)
@@ -86,7 +81,7 @@ public class Inventory implements GameComponent
         font.setColor(Color.RED);
         for(int i = 0; i < items.size(); i++)
         {
-            items.get(i).getGraphics().getSprite().setPosition(x+i*Item.size+i*2+2,y+2);
+            items.get(i).getComponent(SpriteGraphics.class).getSprite().setPosition(x+i*Item.size+i*2+2,y+2);
             items.get(i).draw(b);
             font.draw(b,items.get(i).getName(),x+i*Item.size+i*2+3,y+16);
             font.draw(b,items.get(i).getQuantity()+"",x+i*Item.size+i*2+3,y+32);
@@ -112,22 +107,8 @@ public class Inventory implements GameComponent
     }
 
     @Override
-    public Entity getParent() {
-        return null;
-    }
-
-    @Override
-    public void setParent(Entity set) {
+    public void update() {
 
     }
 
-    @Override
-    public String getId() {
-        return null;
-    }
-
-    @Override
-    public void setId(String s) {
-
-    }
 }

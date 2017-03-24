@@ -2,18 +2,19 @@ package com.mygdx.game.Components.InputComponents;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Components.GameComponents.Inventory;
+import com.mygdx.game.Components.PhysicsComponents.Transform;
 import com.mygdx.game.Entities.Characters.Player;
-import com.mygdx.game.Entities.Entity;
 import com.mygdx.game.Entities.Scenery.MineralNode;
 import com.mygdx.game.Entities.Worlds.TiledWorld;
 import com.mygdx.game.TopDown2DMain;
 
-public class PlayerMouseInput implements PlayerInput<Player,TiledWorld>
+public class PlayerMouseInput extends PlayerInput<Player,TiledWorld>
 {
     public void updateCharacter(Player p, TiledWorld world)
     {
         if(Gdx.input.justTouched() && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            System.out.println("CLICK");
             float w = Gdx.graphics.getWidth();
             float h = Gdx.graphics.getHeight();
 
@@ -23,34 +24,21 @@ public class PlayerMouseInput implements PlayerInput<Player,TiledWorld>
 
 
             for (MineralNode m : world.getNodes()) {
-                if (x > m.getPosition().x && y > m.getPosition().y && x < m.getPosition().x + 50 && y < m.getPosition().y + 50) {
+                Vector2 pos = m.getComponent(Transform.class).getPosition();
+                float xPos = pos.x;
+                float yPos = pos.y;
+                if (x > xPos && y > yPos && x < xPos + 50 && y < yPos + 50) {
                     if(Math.random() < m.getMineChance())
-                        p.getInventory().addItem(m.getMineral());
+                        p.getComponent(Inventory.class).addItem(m.getMineral());
                     else
                         System.out.println("Mine failed");
-
                 }
             }
         }
     }
 
     @Override
-    public Entity getParent() {
-        return null;
-    }
-
-    @Override
-    public void setParent(Entity set) {
-
-    }
-
-    @Override
-    public String getId() {
-        return null;
-    }
-
-    @Override
-    public void setId(String s) {
+    public void update() {
 
     }
 }

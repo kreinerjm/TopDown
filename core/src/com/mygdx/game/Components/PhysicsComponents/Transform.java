@@ -1,12 +1,11 @@
 package com.mygdx.game.Components.PhysicsComponents;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Entities.Entity;
 
 /**
  * Created by Jacob on 3/23/2017.
  */
-public class Transform implements PhysicsComponent
+public class Transform extends PhysicsComponent
 {
     public float rotation = 0f;
     public float scale = 1f;
@@ -65,22 +64,7 @@ public class Transform implements PhysicsComponent
     }
 
     @Override
-    public Entity getParent() {
-        return null;
-    }
-
-    @Override
-    public void setParent(Entity set) {
-
-    }
-
-    @Override
-    public String getId() {
-        return "Transform";
-    }
-
-    @Override
-    public void setId(String s) {
+    public void update() {
 
     }
 }

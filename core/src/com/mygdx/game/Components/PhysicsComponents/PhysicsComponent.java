@@ -2,7 +2,7 @@ package com.mygdx.game.Components.PhysicsComponents;
 
 import com.mygdx.game.Components.Component;
 
-public interface PhysicsComponent extends Component
+public abstract class PhysicsComponent extends Component
 {
 
 

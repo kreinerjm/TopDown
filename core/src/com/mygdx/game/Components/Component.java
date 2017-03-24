@@ -2,12 +2,13 @@ package com.mygdx.game.Components;
 
 import com.mygdx.game.Entities.Entity;
 
-public interface Component
+public abstract class Component
 {
 
-    Entity getParent();
-    void setParent(Entity set);
-    String getId();
-    void setId(String s);
+    Entity parent;
+
+    public Entity getParent(){return parent;}
+    public void setParent(Entity set){parent=set;}
+    public abstract void update();
 
 }

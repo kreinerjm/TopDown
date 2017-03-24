@@ -3,12 +3,11 @@ package com.mygdx.game.Components.GraphicsComponents;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Components.PhysicsComponents.Transform;
 import com.mygdx.game.Entities.Characters.Player;
-import com.mygdx.game.Entities.Entity;
 
-public class SpriteGraphics implements GraphicsComponent
+public class SpriteGraphics extends GraphicsComponent
 {
-
 
     Sprite[] sprite;
     int currentIndex = 0;
@@ -48,24 +47,17 @@ public class SpriteGraphics implements GraphicsComponent
         currentIndex = p.getDirection().getIndexOf();
     }
 
-
-    @Override
-    public Entity getParent() {
-        return null;
+    public void updateSpritePositions()
+    {
+        for(int i = 0; i < sprite.length; i++)
+        {
+            sprite[i].setPosition(getParent().getComponent(Transform.class).getPosition().x,getParent().getComponent(Transform.class).getPosition().y);
+        }
     }
 
-    @Override
-    public void setParent(Entity set) {
-
-    }
 
     @Override
-    public String getId() {
-        return null;
-    }
-
-    @Override
-    public void setId(String s) {
+    public void update() {
 
     }
 }

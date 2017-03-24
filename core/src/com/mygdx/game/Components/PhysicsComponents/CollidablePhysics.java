@@ -1,6 +1,6 @@
 package com.mygdx.game.Components.PhysicsComponents;
 
-public interface CollidablePhysics extends PhysicsComponent
+public abstract class CollidablePhysics extends PhysicsComponent
 {
 
 

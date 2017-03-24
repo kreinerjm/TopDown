@@ -1,7 +1,6 @@
 package com.mygdx.game.Entities.Items;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Components.GraphicsComponents.SpriteGraphics;
 
@@ -12,10 +11,10 @@ public class TestMineral extends Mineral {
 
     public TestMineral(String s, int q, Texture t)
     {
-        graphics = new SpriteGraphics(new Texture[]{t});
+        addComponent(new SpriteGraphics(new Texture[]{t}));
         name = s;
         quantity = q;
-        graphics.getSprite().setSize(Item.size,Item.size);
+        getComponent(SpriteGraphics.class).getSprite().setSize(Item.size,Item.size);
     }
 
     @Override
@@ -25,7 +24,7 @@ public class TestMineral extends Mineral {
 
     @Override
     public void draw(SpriteBatch b) {
-        graphics.draw(b);
+        getComponent(SpriteGraphics.class).draw(b);
     }
 
 

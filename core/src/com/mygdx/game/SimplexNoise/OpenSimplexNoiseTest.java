@@ -4,9 +4,10 @@ package com.mygdx.game.SimplexNoise;
  * OpenSimplex Noise sample class.
  */
 
-import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import java.io.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class OpenSimplexNoiseTest
 {

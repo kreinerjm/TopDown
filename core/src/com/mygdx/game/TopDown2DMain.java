@@ -2,9 +2,12 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Components.PhysicsComponents.Transform;
 import com.mygdx.game.Entities.Characters.Player;
 import com.mygdx.game.Entities.Games.Game;
 import com.mygdx.game.Entities.Games.TopDownGame;
@@ -21,14 +24,18 @@ public class TopDown2DMain extends ApplicationAdapter
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        topDown = new TopDownGame(new TiledWorld(256,128),new Player());
+
+        topDown = new TopDownGame();
+        Player player = new Player();
+        player.getComponent(Transform.class).setPosition(new Vector2(100f,100f));
+        topDown.addSubEntity(player);
+        topDown.addSubEntity(new TiledWorld(256,128));
+
 
         OrthographicCamera camera = new OrthographicCamera(30, 30 * (h / w));
         camera.zoom = 40.0f;
         camera.position.set(0,0,0);
         topDown.setCamera(camera);
-
-        topDown.getPlayer().setPosition(new Vector2(100f,100f));
 
         camera.update();
     }
@@ -54,7 +61,7 @@ public class TopDown2DMain extends ApplicationAdapter
     @Override
     public void dispose() {
         batch.dispose();
-        for(Texture t : topDown.getPlayer().getTextures())
+        for(Texture t : topDown.getSubEntity(Player.class).getTextures())
         {
             t.dispose();
         }

@@ -3,54 +3,89 @@ package com.mygdx.game.Entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Components.Component;
+import com.mygdx.game.Components.PhysicsComponents.Transform;
 import com.mygdx.game.Exceptions.ComponentNotFoundException;
 
 import java.util.ArrayList;
+
+/*
+This class represents a generic entity and the required fields for each entity.
+
+Require Features:
+    List of Components
+
+
+ */
 
 public abstract class Entity
 {
     private final int MAX_COMPONENTS = 10;
     private ArrayList<Component> components = new ArrayList<Component>();
-    private Vector2 position;
     private Entity parent;
     private ArrayList<Entity> subEntities = new ArrayList<Entity>();
-    private int width, height;
 
-    public abstract void tick();
-
-    public abstract void draw(SpriteBatch b);
-
-    public Component getComponent(String s) throws ComponentNotFoundException
+    public void tick()
     {
         for(Component c : components)
         {
-            if(c.getClass().toString().equals(s))
+            c.update();
+        }
+    }
+
+    public abstract void draw(SpriteBatch b);
+
+    public <T extends Component> T getComponent(Class<T> toGet)
+    {
+
+        for(Component c : components)
+        {
+            if(toGet.isInstance(c))
             {
-                return c;
+                return toGet.cast(c);
             }
         }
-        throw new ComponentNotFoundException();
+
+        return (T)new Component(){
+            @Override
+            public void update()
+            {
+
+            }
+        };
     }
+
+    public <T extends Entity> T getSubEntity(Class<T> toGet)
+    {
+        for(Entity e : subEntities)
+        {
+            if(toGet.isInstance(e))
+            {
+                return toGet.cast(e);
+            }
+        }
+
+        return (T)new Entity(){
+            @Override
+            public void draw(SpriteBatch b) {
+
+            }
+        };
+    }
+
 
     public void addComponent(Component c)
     {
         if(components.size() < MAX_COMPONENTS)
+        {
             components.add(c);
+            c.setParent(this);
+            System.out.println(c.getClass().toString()+" setting parent to "+this.getClass().toString());
+        }
     }
 
     public void removeComponent(Component c)
     {
         components.remove(c);
-    }
-
-    public void setPosition(Vector2 pos)
-    {
-        position = pos;
-    }
-
-    public Vector2 getPosition()
-    {
-        return position;
     }
 
     public int getMAX_COMPONENTS()
