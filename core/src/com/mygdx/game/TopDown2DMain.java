@@ -12,6 +12,8 @@ import com.mygdx.game.Entities.Characters.Player;
 import com.mygdx.game.Entities.Games.Game;
 import com.mygdx.game.Entities.Games.TopDownGame;
 import com.mygdx.game.Entities.Worlds.TiledWorld;
+import com.mygdx.server.Server;
+
 
 public class TopDown2DMain extends ApplicationAdapter
 {
@@ -20,12 +22,14 @@ public class TopDown2DMain extends ApplicationAdapter
 
     @Override
     public void create() {
+
         batch = new SpriteBatch();
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
         topDown = new TopDownGame();
+        Server server = new Server(topDown);
         Player player = new Player();
         player.getComponent(Transform.class).setPosition(new Vector2(100f,100f));
         topDown.addSubEntity(player);

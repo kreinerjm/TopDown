@@ -7,6 +7,7 @@ import com.mygdx.game.Components.PhysicsComponents.Transform;
 import com.mygdx.game.Exceptions.ComponentNotFoundException;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /*
 This class represents a generic entity and the required fields for each entity.
@@ -19,6 +20,7 @@ Require Features:
 
 public abstract class Entity
 {
+    public UUID id = UUID.randomUUID();
     private final int MAX_COMPONENTS = 10;
     private ArrayList<Component> components = new ArrayList<Component>();
     private Entity parent;

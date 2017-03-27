@@ -17,7 +17,7 @@ public class Inventory extends GameComponent
 {
     int maxItems = 10;
     ArrayList<Item> items;
-    Sprite inventoryGUI = new Sprite(new Texture("C:/Users/Jacob/Desktop/TopDown2D/core/assets/inventorygui.png"));
+    Sprite inventoryGUI = new Sprite(new Texture("/home/jacob/Desktop/TopDown/core/assets/inventorygui.png"));
 
     public Inventory()
     {
