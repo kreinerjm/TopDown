@@ -45,7 +45,7 @@ public class TiledWorld extends World
 
     ArrayList<MineralNode> nodes = new ArrayList<MineralNode>();
 
-    Texture[] textures = {new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/marble.png")),new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/space.png"))};
+    Texture[] textures = {new Texture(Gdx.files.internal("space.png"))};
 
     public TiledWorld(int wid, int hei)
     {
@@ -105,19 +105,19 @@ public class TiledWorld extends World
                 terrain[i][j] = 0;
             }
         }
-        MineralNode m1 = new MineralNode(new Vector2(50f,50f),5,.5f,new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/CopperNode.png")));
-        MineralNode m2 = new MineralNode(new Vector2(150f,150f),3,.3f,new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/IronNode.png"))){
+        MineralNode m1 = new MineralNode(new Vector2(50f,50f),5,.5f,new Texture(Gdx.files.internal("CopperNode.png")));
+        MineralNode m2 = new MineralNode(new Vector2(150f,150f),3,.3f,new Texture(Gdx.files.internal("IronNode.png"))){
             @Override
             public Mineral getMineral()
             {
-                return new TestMineral("Iron",3,new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/IronNode.png")));
+                return new TestMineral("Iron",3,new Texture(Gdx.files.internal("IronNode.png")));
             }
         };
-        MineralNode m3 = new MineralNode(new Vector2(250f,250f),2,.2f,new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/PlatinumNode.png"))){
+        MineralNode m3 = new MineralNode(new Vector2(250f,250f),2,.2f,new Texture(Gdx.files.internal("PlatinumNode.png"))){
             @Override
             public Mineral getMineral()
             {
-                return new TestMineral("Titanium",2,new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/PlatinumNode.png")));
+                return new TestMineral("Titanium",2,new Texture(Gdx.files.internal("PlatinumNode.png")));
             }
         };
         nodes.add(m1);

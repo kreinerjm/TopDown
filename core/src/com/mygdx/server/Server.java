@@ -10,9 +10,7 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
 import com.mygdx.game.Entities.Games.Game;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -30,12 +28,13 @@ public class Server {
     Session session;
     ArrayList<Socket> clientSockets;
     ServerSocket serverSocket;
+    Game game;
 
-    public Server(Game g)
-    {
+    public Server(Game g) throws IOException, ClassNotFoundException {
+        game = g;
         clientSockets = new ArrayList<>();
-        cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
-        session = cluster.connect("top_down");
+        //cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
+        //session = cluster.connect("top_down");
         List<String> addresses = new ArrayList<String>();
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
@@ -61,7 +60,6 @@ public class Server {
 
         new Thread(new Runnable()
         {
-
             @Override
             public void run() {
                 ServerSocketHints serverSocketHint = new ServerSocketHints();
@@ -99,12 +97,17 @@ public class Server {
                     Socket socket = serverSocket.accept(null);
                     clientSockets.add(socket);
                     // Read data from the socket into a BufferedReader
-                    BufferedReader buffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    try {
+                        ObjectOutputStream stream = new ObjectOutputStream(socket.getOutputStream());
+                        String s = "test string";
+                        stream.writeObject(s);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     for(Socket s : clientSockets)
                     {
                         System.out.println("client ip :"+s.getRemoteAddress());
                     }
-                    for(int i = 0; i < 5; i++)
                     System.out.println("server ip :"+addresses.get(0));
                 }
             }
@@ -115,11 +118,16 @@ public class Server {
         socketHints.connectTimeout = 4000;
         //create the socket and connect to the server entered in the text box ( x.x.x.x format ) on port 9021
         Socket socket = Gdx.net.newClientSocket(Net.Protocol.TCP, addresses.get(0), 9021, socketHints);
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        String msg = (String)in.readObject();
+        System.out.println(msg);
     }
 
     public void dispose()
     {
-
+        serverSocket.dispose();
+        for(Socket s : clientSockets)
+            s.dispose();
     }
 
     public void sendGame()

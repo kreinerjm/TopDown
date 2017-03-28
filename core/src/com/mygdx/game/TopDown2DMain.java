@@ -14,11 +14,14 @@ import com.mygdx.game.Entities.Games.TopDownGame;
 import com.mygdx.game.Entities.Worlds.TiledWorld;
 import com.mygdx.server.Server;
 
+import java.io.IOException;
+
 
 public class TopDown2DMain extends ApplicationAdapter
 {
     public static Game topDown;
     SpriteBatch batch;
+    Server server;
 
     @Override
     public void create() {
@@ -29,7 +32,13 @@ public class TopDown2DMain extends ApplicationAdapter
         float h = Gdx.graphics.getHeight();
 
         topDown = new TopDownGame();
-        Server server = new Server(topDown);
+        try {
+            server = new Server(topDown);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         Player player = new Player();
         player.getComponent(Transform.class).setPosition(new Vector2(100f,100f));
         topDown.addSubEntity(player);
@@ -69,6 +78,7 @@ public class TopDown2DMain extends ApplicationAdapter
         {
             t.dispose();
         }
+        server.dispose();
     }
 
     @Override

@@ -19,14 +19,14 @@ public class Player extends Character
     public Player()
     {
         textures = new Texture[8];
-        textures[0] = new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/playerFront.png"));
-        textures[1] = new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/playerBack.png"));
-        textures[2] = new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/playerLeft.png"));
-        textures[3] = new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/playerRight.png"));
-        textures[4] = new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/playerFrontLeft.png"));
-        textures[5] = new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/playerFrontRight.png"));
-        textures[6] = new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/playerBackLeft.png"));
-        textures[7] = new Texture(Gdx.files.internal("/home/jacob/Desktop/TopDown/core/assets/playerBackRight.png"));
+        textures[0] = new Texture(Gdx.files.internal("playerFront.png"));
+        textures[1] = new Texture(Gdx.files.internal("playerBack.png"));
+        textures[2] = new Texture(Gdx.files.internal("playerLeft.png"));
+        textures[3] = new Texture(Gdx.files.internal("playerRight.png"));
+        textures[4] = new Texture(Gdx.files.internal("playerFrontLeft.png"));
+        textures[5] = new Texture(Gdx.files.internal("playerFrontRight.png"));
+        textures[6] = new Texture(Gdx.files.internal("playerBackLeft.png"));
+        textures[7] = new Texture(Gdx.files.internal("playerBackRight.png"));
 
         Transform transform = new Transform(100,100);
         transform.setVelocity(new Vector2(5,5));
